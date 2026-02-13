@@ -1,5 +1,5 @@
 # GEOG478_ALC
-# Avery Carlyle GEOg 478 - WebGIS Repository
+# Avery Carlyle GEOG 478 - WebGIS Repository
 | Homeworks                 | Labs                 | Project|
 | :-----------------:       | :-----------------:  | :-----------: |
 | [week01](homework/week01) | [week01](lab/week01) | |
