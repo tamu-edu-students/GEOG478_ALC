@@ -1,0 +1,57 @@
+# GEOG478_ALC
+# Avery Carlyle GEOG 478 - WebGIS Repository
+# tutorial 2
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tutorial 2 - Mobile & Geolocation</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    #map {
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+var map = L.map('map').setView([32.3513, -95.3011], 13);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19
+}).addTo(map);
+map.locate({ setView: true, maxZoom: 16 });
+
+function onLocationFound(e) {
+  var radius = e.accuracy / 2;
+
+  L.marker(e.latlng).addTo(map)
+    .bindPopup("You are within " + radius + " meters")
+    .openPopup();
+
+  L.circle(e.latlng, radius).addTo(map);
+}
+
+function onLocationError(e) {
+  alert("Location access denied");
+}
+
+map.on('locationfound', onLocationFound);
+map.on('locationerror', onLocationError);
+</script>
+
+</body>
+</html>
