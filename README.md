@@ -13,3 +13,4 @@
 | [week09](homework/week06) | [week09](lab/week06) | |
 | [week10](homework/week07) | [week10](lab/week07) | |
 | [week11](homework/week08) | [week11](lab/week08) | |
+| [week11](homework/week08) | [week12](Labs/week12) | |

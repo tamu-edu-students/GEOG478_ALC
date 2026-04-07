@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>College Station Weekly Temperature Forecast</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+        }
+
+        #d3chart {
+            margin: 40px auto;
+        }
+
+        #highchart {
+            width: 800px;
+            height: 400px;
+            margin: 40px auto;
+        }
+
+        .line-high {
+            fill: none;
+            stroke: red;
+            stroke-width: 2;
+        }
+
+        .line-low {
+            fill: none;
+            stroke: blue;
+            stroke-width: 2;
+        }
+    </style>
+</head>
+<body>
+<h2>Avery Carlyle - D3 Line Chart</h2>
+<svg id="d3chart" width="800" height="400"></svg>
+<h2>College Station, TX Weekly temp. Forecast (F)</h2>
+<div id="highchart"></div>
+<script>
+var days = ["Sat","Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+var high = [82,81,81,70,77,78,79,80];
+var low = [67,59,50,47,51,60,66,66];
+var svg = d3.select("#d3chart"),
+    margin = {top:20, right:20, bottom:40, left:50},
+    width = 800 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+var x = d3.scalePoint()
+    .domain(days)
+    .range([0, width]);
+var y = d3.scaleLinear()
+    .domain([40, 90])
+    .range([height, 0]);
+var lineHigh = d3.line()
+    .x((d, i) => x(days[i]))
+    .y(d => y(d));
+var lineLow = d3.line()
+    .x((d, i) => x(days[i]))
+    .y(d => y(d));
+g.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x));
+g.append("g")
+    .call(d3.axisLeft(y));
+
+g.append("path")
+    .datum(high)
+    .attr("class", "line-high")
+    .attr("d", lineHigh);
+
+g.append("path")
+    .datum(low)
+    .attr("class", "line-low")
+    .attr("d", lineLow);
+
+Highcharts.chart('highchart', {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: 'College Station Weekly Temperature Forecast'
+    },
+    xAxis: {
+        categories: days
+    },
+    yAxis: {
+        title: {
+            text: 'Temperature (°F)'
+        }
+    },
+    series: [{
+        name: 'Highest (°F)',
+        data: high,
+        color: 'red'
+    }, {
+        name: 'Lowest (°F)',
+        data: low,
+        color: 'blue'
+    }]
+
+});
+</script>
+
+</body>
+</html>
